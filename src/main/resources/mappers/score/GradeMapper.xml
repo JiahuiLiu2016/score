@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.GradeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.Grade">
+        <id column="id" property="id"/>
+        <result column="local_student_id" property="localStudentId"/>
+        <result column="external_student_id" property="externalStudentId"/>
+        <result column="subject_id" property="subjectId"/>
+        <result column="exam_type_id" property="examTypeId"/>
+        <result column="academic_year_id" property="academicYearId"/>
+        <result column="joint_exam_id" property="jointExamId"/>
+        <result column="raw_score" property="rawScore"/>
+        <result column="assigned_score" property="assignedScore"/>
+        <result column="is_passed" property="isPassed"/>
+        <result column="exam_date" property="examDate"/>
+        <result column="grade_level" property="gradeLevel"/>
+        <result column="remark" property="remark"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.local_student_id,
+        o.external_student_id,
+        o.subject_id,
+        o.exam_type_id,
+        o.academic_year_id,
+        o.joint_exam_id,
+        o.raw_score,
+        o.assigned_score,
+        o.is_passed,
+        o.exam_date,
+        o.grade_level,
+        o.remark,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.GradeVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.grade o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.GradeVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.grade o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

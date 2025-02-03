@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.ExamTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.ExamType">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.name,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.ExamTypeVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.exam_type o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.ExamTypeVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.exam_type o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

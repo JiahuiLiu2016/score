@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.SubjectAcademicYearMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.SubjectAcademicYear">
+        <id column="id" property="id"/>
+        <result column="subject_id" property="subjectId"/>
+        <result column="academic_year_id" property="academicYearId"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.subject_id,
+        o.academic_year_id,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.SubjectAcademicYearVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.subject_academic_year o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.SubjectAcademicYearVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.subject_academic_year o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

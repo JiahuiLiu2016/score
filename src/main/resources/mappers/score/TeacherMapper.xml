@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.TeacherMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.Teacher">
+        <id column="id" property="id"/>
+        <result column="teacher_id" property="teacherId"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="current_school_id" property="currentSchoolId"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.teacher_id,
+        o.name,
+        o.gender,
+        o.current_school_id,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.TeacherVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.teacher o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.TeacherVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.teacher o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

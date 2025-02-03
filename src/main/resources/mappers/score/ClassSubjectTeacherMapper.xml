@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.ClassSubjectTeacherMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.ClassSubjectTeacher">
+        <id column="id" property="id"/>
+        <result column="class_id" property="classId"/>
+        <result column="subject_id" property="subjectId"/>
+        <result column="teacher_id" property="teacherId"/>
+        <result column="academic_year_id" property="academicYearId"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.class_id,
+        o.subject_id,
+        o.teacher_id,
+        o.academic_year_id,
+        o.start_date,
+        o.end_date,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.ClassSubjectTeacherVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.class_subject_teacher o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.ClassSubjectTeacherVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.class_subject_teacher o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

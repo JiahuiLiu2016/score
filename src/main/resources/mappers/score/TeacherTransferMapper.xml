@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.TeacherTransferMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.TeacherTransfer">
+        <id column="id" property="id"/>
+        <result column="teacher_id" property="teacherId"/>
+        <result column="original_school_id" property="originalSchoolId"/>
+        <result column="new_school_id" property="newSchoolId"/>
+        <result column="transfer_start_date" property="transferStartDate"/>
+        <result column="transfer_end_date" property="transferEndDate"/>
+        <result column="academic_year_id" property="academicYearId"/>
+        <result column="transfer_order" property="transferOrder"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.teacher_id,
+        o.original_school_id,
+        o.new_school_id,
+        o.transfer_start_date,
+        o.transfer_end_date,
+        o.academic_year_id,
+        o.transfer_order,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.TeacherTransferVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.teacher_transfer o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.TeacherTransferVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.teacher_transfer o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.LocalStudentSubjectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.LocalStudentSubject">
+        <id column="id" property="id"/>
+        <result column="student_id" property="studentId"/>
+        <result column="subject_id" property="subjectId"/>
+        <result column="academic_year_id" property="academicYearId"/>
+        <result column="is_selected" property="isSelected"/>
+        <result column="is_foreign_language_selection" property="isForeignLanguageSelection"/>
+        <result column="selection_date" property="selectionDate"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.student_id,
+        o.subject_id,
+        o.academic_year_id,
+        o.is_selected,
+        o.is_foreign_language_selection,
+        o.selection_date,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.LocalStudentSubjectVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.local_student_subject o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.LocalStudentSubjectVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.local_student_subject o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

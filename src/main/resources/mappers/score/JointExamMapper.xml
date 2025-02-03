@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.JointExamMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.JointExam">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="exam_date" property="examDate"/>
+        <result column="has_all_school_info" property="hasAllSchoolInfo"/>
+        <result column="delete_flag" property="deleteFlag"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.id,
+        o.name,
+        o.exam_date,
+        o.has_all_school_info,
+        o.delete_flag
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.JointExamVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.joint_exam o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.JointExamVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.joint_exam o
+        WHERE o.id = #{id}
+    </select>
+</mapper>

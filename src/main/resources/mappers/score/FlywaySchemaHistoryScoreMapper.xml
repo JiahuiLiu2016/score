@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ss.score.module.score.mapper.FlywaySchemaHistoryScoreMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="baseResultMap" type="com.ss.score.module.score.domain.entity.FlywaySchemaHistoryScore">
+        <id column="installed_rank" property="installedRank"/>
+        <result column="version" property="version"/>
+        <result column="description" property="description"/>
+        <result column="type" property="type"/>
+        <result column="script" property="script"/>
+        <result column="checksum" property="checksum"/>
+        <result column="installed_by" property="installedBy"/>
+        <result column="installed_on" property="installedOn"/>
+        <result column="execution_time" property="executionTime"/>
+        <result column="success" property="success"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="allColumn">
+        o.installed_rank,
+        o.version,
+        o.description,
+        o.type,
+        o.script,
+        o.checksum,
+        o.installed_by,
+        o.installed_on,
+        o.execution_time,
+        o.success
+    </sql>
+    <select id="selectListVO" resultType="com.ss.score.module.score.domain.vo.FlywaySchemaHistoryScoreVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.flyway_schema_history_score o
+    </select>
+    <select id="selectByIdVO" resultType="com.ss.score.module.score.domain.vo.FlywaySchemaHistoryScoreVO">
+        SELECT
+        <include refid="allColumn"/>
+        FROM `score`.flyway_schema_history_score o
+        WHERE o.id = #{id}
+    </select>
+</mapper>
