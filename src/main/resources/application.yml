@@ -1,0 +1,56 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /score
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.5.11:3306/score?autoReconnect=true&useServerPreparedStmts=false&rewriteBatchedStatements=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    hikari:
+      maximum-pool-size: 60
+  servlet:
+    multipart:
+      max-file-size: 5GB
+      max-request-size: 5GB
+  flyway:
+    # 是否启用flyway，默认关闭，需要引用的各个系统自己打开
+    enabled: true
+    # 编码格式，默认UTF-8
+    encoding: UTF-8
+    # 迁移sql脚本文件存放路径，默认db/migration
+    locations: classpath:db/migration
+    # 迁移sql脚本文件名称的前缀，默认V
+    sql-migration-prefix: V
+    # 迁移sql脚本文件名称的分隔符，默认2个下划线__
+    sql-migration-separator: __
+    # 迁移sql脚本文件名称的后缀
+    sql-migration-suffixes: .sql
+    # 迁移时是否进行校验，默认true
+    validate-on-migrate: true
+    # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
+    baseline-on-migrate: true
+    # 重复sql脚本文件名称的前缀，默认R
+    repeatable-sql-migration-prefix: R
+    #生成的校验表名字，默认flyway_schema_history，由于后端项目的数据库连接都是指向
+    #不能共用同一个表来管理数据库迭代版本，因此这里需要每一个后台项目自行配置表名
+    table: flyway_schema_history_score
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+  global-config:
+    db-config:
+      logic-delete-field: deleteFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  mapper-locations: classpath*:/mappers/**/*.xml
+
+#sentry:
+#  env: ljh-local
+#  project: fms
